@@ -15,7 +15,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "fmt": "npx prettier . --check",
+    "fmt-fix": "npx prettier . --write",
+    "lint": "npx eslint",
+    "lint-fix": "npx eslint --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +38,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.1.0",
+    "@eslint/js": "^9.4.0",
+    "eslint": "^9.4.0",
+    "eslint-plugin-react": "^7.34.2",
+    "globals": "^15.4.0",
+    "prettier": "3.3.2"
   }
 }

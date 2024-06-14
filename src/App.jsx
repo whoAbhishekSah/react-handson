@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const UserBrief = ({ user }) => {
   return (
     <div>
       <p>
-        Name: {user.firstName} {user.lastName}{" "}
+        Name: {user.firstName} {user.lastName}{' '}
       </p>
       <p>Phone Number: {user.phone}</p>
     </div>
@@ -56,7 +56,7 @@ const Profile = ({ id }) => {
 function App() {
   return (
     <div className="App">
-      <Profile id={"abs"} />
+      <Profile id={'abs'} />
     </div>
   );
 }

@@ -1,23 +1,6 @@
 import { useEffect, useState } from 'react';
-
-const UserBrief = ({ user }) => {
-  return (
-    <div>
-      <p>
-        Name: {user.firstName} {user.lastName}{' '}
-      </p>
-      <p>Phone Number: {user.phone}</p>
-    </div>
-  );
-};
-
-const ErrorPage = ({ err }) => {
-  return (
-    <div>
-      <p>Error: {err}</p>
-    </div>
-  );
-};
+import { UserBrief } from './UserBrief';
+import { ErrorPage } from './Error';
 
 const Profile = ({ id }) => {
   const [user, setUser] = useState(undefined);
@@ -29,7 +12,6 @@ const Profile = ({ id }) => {
       try {
         setIsLoading(true);
         const response = await fetch(`https://dummyjson.com/users/${id}`);
-        console.log(response);
         if (!response.ok) {
           throw new Error(`Failed to fetch user with id: ${id}`);
         }

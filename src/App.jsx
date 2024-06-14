@@ -22,18 +22,22 @@ const ErrorPage = ({ err }) => {
 const Profile = ({ id }) => {
   const [user, setUser] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(undefined);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         setIsLoading(true);
         const response = await fetch(`https://dummyjson.com/users/${id}`);
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch user with id: ${id}`);
+        }
         const jsonData = await response.json();
         setUser(jsonData);
       } catch (err) {
         console.error(err);
-        setIsError(err);
+        setError(err);
       } finally {
         setIsLoading(false);
       }
@@ -42,12 +46,12 @@ const Profile = ({ id }) => {
     fetchUser();
   }, [id]);
 
-  if (isLoading || !user) {
-    return <div>Loading...</div>;
+  if (error) {
+    return <ErrorPage err={error.message} />;
   }
 
-  if (isError) {
-    return <ErrorPage err={isError} />;
+  if (isLoading || !user) {
+    return <div>Loading...</div>;
   }
 
   return <UserBrief user={user} />;
@@ -56,7 +60,7 @@ const Profile = ({ id }) => {
 function App() {
   return (
     <div className="App">
-      <Profile id={'abs'} />
+      <Profile id={1} />
     </div>
   );
 }

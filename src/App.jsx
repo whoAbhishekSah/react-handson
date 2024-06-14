@@ -1,32 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useUser } from './hooks/user';
 import { UserBrief } from './UserBrief';
 import { ErrorPage } from './Error';
 
 const Profile = ({ id }) => {
-  const [user, setUser] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch(`https://dummyjson.com/users/${id}`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch user with id: ${id}`);
-        }
-        const jsonData = await response.json();
-        setUser(jsonData);
-      } catch (err) {
-        console.error(err);
-        setError(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, [id]);
+  const { isLoading, error, user } = useUser(id);
 
   if (error) {
     return <ErrorPage err={error.message} />;

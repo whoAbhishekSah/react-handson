@@ -8,7 +8,7 @@ export const useUser = (id) => {
   const fetchUser = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`https://dummyjson.com/users/${id}`);
+      const response = await fetch(`http://localhost:4000/api/users/${id}`);
       if (!response.ok) {
         throw new Error(`Failed to fetch user with id: ${id}`);
       }

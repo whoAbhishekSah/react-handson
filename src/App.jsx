@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useUser } from './hooks/user';
 import { UserBrief } from './UserBrief';
 import { ErrorPage } from './Error';
+import { Friends } from './friends';
 
 const Profile = ({ id }) => {
   const { isLoading, error, user, fetchUser } = useUser(id);
@@ -25,6 +26,7 @@ function App() {
   return (
     <div className="App">
       <Profile id={`1`} />
+      <Friends id={`1`} />
     </div>
   );
 }

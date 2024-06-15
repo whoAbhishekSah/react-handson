@@ -1,16 +1,21 @@
-import { useFriends } from './hooks/friends';
 import { ErrorPage } from './Error';
 import { useEffect } from 'react';
+import { useService } from './hooks/service';
 
 export const Friends = ({ id }) => {
-  const { loading, error, friends, fetchFriends } = useFriends(id);
+  const {
+    loading,
+    error,
+    data: friends,
+    fetchUrl,
+  } = useService(`http://localhost:4000/api/users/${id}/friends`);
 
   useEffect(() => {
-    fetchFriends();
-  }, []);
+    fetchUrl();
+  }, [id]);
 
   if (error) {
-    return <ErrorPage err={error.message} />;
+    return <ErrorPage err={`failed to fetch friends for user with id ${id}`} />;
   }
 
   if (loading) {
@@ -29,7 +34,7 @@ export const Friends = ({ id }) => {
           return (
             <tr>
               <td>
-                {i.firstName} {i['lastName']}
+                {i['firstName']} {i['lastName']}
               </td>
               <td>{i['phone']}</td>
             </tr>

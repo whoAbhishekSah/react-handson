@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { get } from '../utils/get';
 
 export const useService = (url) => {
   const [data, setData] = useState(undefined);
@@ -8,11 +9,7 @@ export const useService = (url) => {
   const fetchUrl = async () => {
     try {
       setLoading(true);
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch url ${url}`);
-      }
-      const jsonData = await response.json();
+      const jsonData = await get(url);
       setData(jsonData);
     } catch (err) {
       console.error(err);

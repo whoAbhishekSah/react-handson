@@ -17,3 +17,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 2. Formatting Fix: `npm run fmt-fix`
 3. Lint check: `npm run lint`
 4. Lint Fix: `npm run fix`
+
+## Optimizations
+
+1. Request Waterfalls and Fetch-On-Render
+2.

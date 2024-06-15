@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import { useUser } from './hooks/user';
 import { UserBrief } from './UserBrief';
 import { ErrorPage } from './Error';
 
 const Profile = ({ id }) => {
-  const { isLoading, error, user } = useUser(id);
+  const { isLoading, error, user, fetchUser } = useUser(id);
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   if (error) {
     return <ErrorPage err={error.message} />;
@@ -19,7 +24,7 @@ const Profile = ({ id }) => {
 function App() {
   return (
     <div className="App">
-      <Profile id={1} />
+      <Profile id={`1`} />
     </div>
   );
 }

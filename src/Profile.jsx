@@ -1,27 +1,28 @@
 import { useEffect } from 'react';
-import { useService } from './hooks/service';
+import { useUserProfile } from './hooks/userProfile';
 import { UserBrief } from './UserBrief';
 import { ErrorPage } from './Error';
+import { Friends } from './friends';
 
 export const Profile = ({ id }) => {
-  const {
-    loading,
-    error,
-    data: user,
-    fetchUrl,
-  } = useService(`http://localhost:4000/api/users/${id}`);
+  const { loading, error, profileData, fetchUserProfile } = useUserProfile(id);
 
   useEffect(() => {
-    fetchUrl();
+    fetchUserProfile();
   }, [id]);
 
   if (error) {
     return <ErrorPage err={`failed to fetch user with id ${id}`} />;
   }
 
-  if (loading || !user) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
-  return <UserBrief user={user} />;
+  return (
+    <>
+      <UserBrief user={profileData.user} />
+      <Friends friends={profileData.friends} />
+    </>
+  );
 };

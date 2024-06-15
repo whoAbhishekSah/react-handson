@@ -1,27 +1,4 @@
-import { ErrorPage } from './Error';
-import { useEffect } from 'react';
-import { useService } from './hooks/service';
-
-export const Friends = ({ id }) => {
-  const {
-    loading,
-    error,
-    data: friends,
-    fetchUrl,
-  } = useService(`http://localhost:4000/api/users/${id}/friends`);
-
-  useEffect(() => {
-    fetchUrl();
-  }, [id]);
-
-  if (error) {
-    return <ErrorPage err={`failed to fetch friends for user with id ${id}`} />;
-  }
-
-  if (loading) {
-    return <div>Loading Friends...</div>;
-  }
-
+export const Friends = ({ friends }) => {
   return (
     <div>
       <p>Friends List</p>
